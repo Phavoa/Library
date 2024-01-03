@@ -1,0 +1,17 @@
+.books {
+  width: 100%;
+  height: fit-content;
+  border: 1px solid black;
+}
+
+.books {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  background-color: aqua;
+  border: 2px solid green;
+}
+
+.book-card {
+  border: 1px solid red;
+}
