@@ -1,101 +1,98 @@
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
-const pages = document.querySelector('#pages');
-const read = document.querySelector('#read');
-const bookForm = document.querySelector('#book-form');
-const submitForm = document.querySelector('#submit');
-const books = document.querySelector(".books");
-const formDialog = document.querySelector("#formDialog");
-const showDialog = document.querySelector("#showDialog");
-const closeBtn = document.querySelector('#closeBtn');
-const removeBookBtn = document.querySelector(".removeBookBtn");
+// Encapsulate in an IIFE to avoid polluting the global scope
+(function () {
+  const title = document.querySelector('#title');
+  const author = document.querySelector('#author');
+  const pages = document.querySelector('#pages');
+  const read = document.querySelector('#read');
+  const bookForm = document.querySelector('#book-form');
+  const submitForm = document.querySelector('#submit');
+  const books = document.querySelector(".books");
+  const formDialog = document.querySelector("#formDialog");
+  const showDialog = document.querySelector("#showDialog");
+  const closeBtn = document.querySelector('#closeBtn');
+  const removeBookBtn = document.querySelector(".removeBookBtn");
 
-let num = 0;
+  const myLibrary = [];
 
-const book = { title: "The beginning After The End", Author: "Tega", pages: 200, read: true }
-
-const myLibrary = [];
-
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-
-function addBookToLibrary(book) {
-  myLibrary.push(book);
-}
-
-function removeBook() {
-  myLibrary.pop();
-  books.removeChild(books.lastChild);
-  
-  console.log(myLibrary);
-}
-
-function removeEachBook(deleteBook) {
-  for (let i = 0; i < myLibrary.length; i++) {
-    deleteBook.addEventListener('cl')
+  function Book(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
   }
-}
 
-function displayBooks() {
-
-  for (let i = 0; i < myLibrary.length; i++) {
-    num++;
-    console.log(num += 1);
+  function addBookToLibrary(book) {
+    myLibrary.push(book);
   }
-  const bookCard = document.createElement("div");
-  bookCard.className = "book-card";
 
-  const titleDiv = document.createElement('div');
-  const authorDiv = document.createElement('div');
-  const pagesDiv = document.createElement('div');
-  const readDiv = document.createElement('div');
-
-  for (let i = 0; i < myLibrary.length; i++) {
-    
-    titleDiv.textContent = myLibrary[i].title;
-    authorDiv.textContent = myLibrary[i].author;
-    pagesDiv.textContent = myLibrary[i].pages;
-    readDiv.textContent = myLibrary[i].read;
-
-    bookCard.appendChild(titleDiv);
-    bookCard.appendChild(authorDiv);
-    bookCard.appendChild(pagesDiv);
-    bookCard.appendChild(readDiv);
+  function deleteBook(index) {
+    myLibrary.splice(index, 1);
+    console.log(index);
+    displayBooks();
   }
-  books.appendChild(bookCard);
-}
 
+  function displayBooks() {
+    // Clear existing content in the books div
+    books.textContent = "";
 
-showDialog.addEventListener('click', () => {
-  formDialog.show();
-});
+    myLibrary.forEach((book, index) => {
+      const bookCard = document.createElement("div");
+      bookCard.className = "book-card";
 
-closeBtn.addEventListener('click', () => {
-  // Close the dialog when the close button is clicked
-  formDialog.close();
-});
+      const titleDiv = createDivWithText(book.title);
+      const authorDiv = createDivWithText(book.author);
+      const pagesDiv = createDivWithText(book.pages);
+      const readDiv = createDivWithText(book.read ? 'Read' : 'Unread');
+      const removeBtn = createButton('Remove', () => 
+      deleteBook(index));
 
+      bookCard.appendChild(titleDiv);
+      bookCard.appendChild(authorDiv);
+      bookCard.appendChild(pagesDiv);
+      bookCard.appendChild(readDiv);
+      bookCard.appendChild(removeBtn);
 
-submitForm.addEventListener('click', (event) => {
-  event.preventDefault();
-  const bookTitle = title.value;
-  const bookAuthor = author.value;
-  const bookpages = pages.value;
-  const bookRead = read.checked;
-  const newBook = new Book(bookTitle, bookAuthor, bookpages, bookRead);
+      books.appendChild(bookCard);
+    });
+  }
 
-  addBookToLibrary(newBook);
+  function createDivWithText(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div;
+  }
 
-  bookForm.reset();
-  displayBooks();
-  console.log(myLibrary)
-})
+  function createButton(text, onClick) {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', onClick);
+    return button;
+  }
 
+  showDialog.addEventListener('click', () => formDialog.show());
 
-removeBookBtn.addEventListener('click', () => {
-  removeBook();
-});
+  closeBtn.addEventListener('click', () => formDialog.close());
+
+  submitForm.addEventListener('click', (event) => {
+    event.preventDefault();
+    const bookTitle = title.value;
+    const bookAuthor = author.value;
+    const bookPages = pages.value;
+    const bookRead = read.checked;
+
+    const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
+
+    addBookToLibrary(newBook);
+
+    bookForm.reset();
+    displayBooks();
+  });
+
+  removeBookBtn.addEventListener('click', () => {
+    // Check if there are books to remove
+    if (myLibrary.length > 0) {
+      myLibrary.pop();
+      displayBooks();
+    }
+  });
+})();
