@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="bg-image">
+      <div class="logo">
+        <img src="./image/odin-lined.png" alt="logo">
+        <h1>ODIN</h1>
+      </div>
+    </div>
+    <div class="content">
+      <div class="intro-section">
+        <p>This is not a real Online service! You know you need something like this in your life to help you realize
+          your deepest dreams.</p>
+        <p>Sign up <em>now</em> to get started.</p>
+        <p>You <em>know</em> you want to.</p>
+      </div>
+      <form action="" class="form-section">
+        <div class="main-form">
+          <p>Let's do this!</p>
+          <div class="form-row">
+            <div class="first-name">
+              <label for="first-name">FIRST NAME</label>
+              <input id="first-name" name="first-name" type="text" placeholder="John Doe" required>
+            </div>
+            <div class="last-name">
+              <label for="first-name">LAST NAME</label>
+              <input id="last-name" name="last-name" type="text" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="email">
+              <label for="email">EMAIL</label>
+              <input id="email" name="email" type="email" required>
+            </div>
+            <div class="phone">
+              <label for="phone">PHONE NUMBER</label>
+              <input id="phone" name="phone" type="tel" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="password">
+              <label for="password">PASSWORD</label>
+              <input id="password" name="password" type="password" required>
+            </div>
+            <div class="password">
+              <label for="com-password">CONFIRM PASSWORD</label>
+              <input id="com-password" name="com-password" type="password" required>
+            </div>
+          </div>
+        </div>
+        <div class="btn">
+          <button id="submitButton">Create Account</button>
+        </div>
+      </form>
+      <div class="login">
+        <p>Already have an Account? <span>Log in</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>

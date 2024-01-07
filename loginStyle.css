@@ -1,0 +1,146 @@
+html {
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Norse Bold';
+  src: url('Norse-Bold.otf') format('opentype');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.bg-image {
+  width: 40%;
+  background: url(./image/bg-img.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  background-color: rgba(2, 2, 2, 0.5);
+  height: 100px;
+  width: 100%;
+  justify-content: center;
+}
+
+.logo>img {
+  height: 100%;
+}
+
+h1 {
+  font-family: "Norse Bold";
+  color: white;
+  font-size: 5rem;
+  margin: auto 0;
+}
+
+.content {
+  width: 60%;
+  background-color: rgb(230, 234, 239);
+  padding: 0;
+  margin: 0;
+}
+
+.intro-section {
+  padding: 100px 0 0 40px;
+}
+
+p {
+  font-weight: 700;
+}
+
+.form-section {
+  width: 100%;
+}
+
+.main-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  padding: 10px 40px;
+  box-shadow: 2px 5px 5px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+.form-row {
+  display: flex;
+  gap: 70px;
+}
+
+.form-row>div {
+  width: 100%;
+  width: min(100%, 300px);
+
+}
+
+label,
+input {
+  display: block;
+}
+
+label {
+  font-size: 0.8rem;
+}
+
+input {
+  appearance: none;
+  border: 1px solid #E5E7EB;
+  border-radius: 5px;
+  height: 25px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+input:focus {
+  outline: none;
+}
+
+input:hover,
+input:focus {
+  box-shadow: inset 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid blue;
+}
+
+.btn,
+.login {
+  padding: 10px 40px;
+}
+
+.btn>button {
+  margin-top: 50px;
+  background-color: #596D48;
+  color: white;
+  width: 250px;
+  height: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 2px 5px 5px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  font-size: 1.1rem;
+
+}
+
+input:valid {
+  border: 1px solid green;
+}
+
+span {
+  color: #596D48;
+  font-weight: 700;
+}
