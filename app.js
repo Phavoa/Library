@@ -1,3 +1,4 @@
+
 // Encapsulate in an IIFE to avoid polluting the global scope
 
 const title = document.querySelector('#title');
@@ -12,6 +13,7 @@ const showDialog = document.querySelector("#showDialog");
 const closeBtn = document.querySelector('#closeBtn');
 const removeBookBtn = document.querySelector(".removeBookBtn");
 const image = document.querySelector("#image");
+
 
 const myLibrary = [];
 
@@ -29,13 +31,15 @@ function addBookToLibrary(book) {
 
 function deleteBook(index) {
   myLibrary.splice(index, 1);
-  console.log(index);
   displayBooks();
 }
 
-function changeRead() {
-  if (myLibrary.read === false)
-    return true;
+function changeRead(index) {
+  if (myLibrary[index].read === false)
+    myLibrary[index].read = true;
+  else{
+    myLibrary[index].read = false;
+  } 
   displayBooks();
 };
 
@@ -72,18 +76,14 @@ function displayBooks() {
     const removeBtn = createButton('Remove', () =>
       deleteBook(index));
     removeBtn.className = "removeBtn";
-    const toggleInput = createToggle(() => changeRead());
-    toggleInput.id = 'toggleInput';
-
-
+    const toggleInput = createToggle(() => changeRead(index));
 
     bookCard.appendChild(titleDiv);
     bookCard.appendChild(authorDiv);
     bookCard.appendChild(pagesDiv);
     bookCard.appendChild(readDiv);
     bookCard.appendChild(removeBtn);
-    bookCard.appendChild(inputToggle);
-
+    bookCard.appendChild(toggleInput);
     books.appendChild(bookCard);
   });
   console.log(myLibrary)
@@ -103,12 +103,21 @@ function createButton(text, onClick) {
 }
 
 function createToggle(onChange) {
-  const input = document.createElement('input');
-  input.type = 'checkbox';
-  input.addEventListener('click', onChange);
-  return input;
-}
+  const toggleContainer = document.createElement('label');
+  toggleContainer.className = 'toggle-container';
 
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.addEventListener('change', onChange);
+
+  const slider = document.createElement('span');
+  slider.className = 'slider';
+
+  toggleContainer.appendChild(checkbox);
+  toggleContainer.appendChild(slider);
+
+  return toggleContainer;
+}
 
 showDialog.addEventListener('click', () => formDialog.show());
 
@@ -133,8 +142,8 @@ submitForm.addEventListener('click', (event) => {
 
   addBookToLibrary(newBook);
 
-/*     bookForm.reset();
- */    displayBooks();
+    bookForm.reset();
+    displayBooks();
 });
 
 removeBookBtn.addEventListener('click', () => {
@@ -144,4 +153,5 @@ removeBookBtn.addEventListener('click', () => {
     displayBooks();
   }
 });
+
 

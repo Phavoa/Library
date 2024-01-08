@@ -213,21 +213,19 @@ dialog {
   border: none;
 }
 
-.toggle-switch {
+
+/* Add these styles to your existing CSS */
+
+.toggle-container {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 30px;
+  height: 14px;
+  margin: auto;
+  margin-top: 10px;
+
 }
 
-/* Hide the default checkbox */
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* Style for the slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -240,25 +238,29 @@ dialog {
   border-radius: 34px;
 }
 
-/* Style for the slider when it's in the "on" state */
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
+  height: 12px;
+    width: 12px;
+    left: 1px;
+    bottom: 1px;
+  background-color: rgb(62, 56, 253);
   transition: .4s;
   border-radius: 50%;
 }
 
-/* Style for the slider when the checkbox is checked */
-.toggle-switch input:checked + .slider {
+/* Adjust the following styles to properly target the checkbox state */
+.toggle-container input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-container input:checked + .slider {
   background-color: #2196F3;
 }
 
-/* Style for the slider when the checkbox is checked */
-.toggle-switch input:checked + .slider:before {
+.toggle-container input:checked + .slider:before {
   transform: translateX(26px);
 }
